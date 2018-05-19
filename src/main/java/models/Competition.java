@@ -1,8 +1,11 @@
 package models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "competitions")
 public class Competition {
 
     private int id;
@@ -12,12 +15,14 @@ public class Competition {
     public Competition() {
     }
 
-    public Competition(int id, String name) {
-        this.id = id;
+    public Competition(String name) {
         this.name = name;
         this.teams = new ArrayList<Team>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,6 +31,7 @@ public class Competition {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -34,6 +40,10 @@ public class Competition {
         this.name = name;
     }
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "team_competition",
+            joinColumns = {@JoinColumn(name = "competition_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "team_id", nullable = false, updatable = false)})
     public List<Team> getTeams() {
         return teams;
     }
