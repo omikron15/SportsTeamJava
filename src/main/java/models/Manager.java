@@ -1,5 +1,10 @@
 package models;
 
+import javax.persistence.*;
+import javax.xml.soap.Name;
+
+@Entity
+@Table(name = "managers")
 public class Manager {
 
     private int id;
@@ -10,12 +15,15 @@ public class Manager {
     public Manager() {
     }
 
-    public Manager(String name, int age, Team team) {
+    public Manager(String name, int age) {
         this.name = name;
         this.age = age;
         this.team = team;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -24,6 +32,7 @@ public class Manager {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -32,6 +41,7 @@ public class Manager {
         this.name = name;
     }
 
+    @Column(name = "age")
     public int getAge() {
         return age;
     }
@@ -40,6 +50,7 @@ public class Manager {
         this.age = age;
     }
 
+    @OneToOne(mappedBy = "manager", cascade = CascadeType.PERSIST)
     public Team getTeam() {
         return team;
     }

@@ -1,7 +1,12 @@
 package models;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name = "teams")
 public class Team {
 
     private int id;
@@ -16,8 +21,13 @@ public class Team {
     public Team(String name, Manager manager) {
         this.name = name;
         this.manager = manager;
+        this.players = new ArrayList<Player>();
+        this.competitions = new ArrayList<Competition>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,6 +36,7 @@ public class Team {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -34,6 +45,7 @@ public class Team {
         this.name = name;
     }
 
+    @OneToMany(mappedBy = "team")
     public List<Player> getPlayers() {
         return players;
     }
@@ -42,6 +54,7 @@ public class Team {
         this.players = players;
     }
 
+    @OneToOne(mappedBy = "team", cascade = CascadeType.PERSIST)
     public Manager getManager() {
         return manager;
     }
@@ -50,6 +63,10 @@ public class Team {
         this.manager = manager;
     }
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "team_competition",
+            inverseJoinColumns = {@JoinColumn(name = "competition_id", nullable = false, updatable = false)},
+            joinColumns = {@JoinColumn(name = "team_id", nullable = false, updatable = false)})
     public List<Competition> getCompetitions() {
         return competitions;
     }
@@ -65,7 +82,5 @@ public class Team {
     public void addPlayer(Player player){
         this.players.add(player);
     }
-
-
 
 }
