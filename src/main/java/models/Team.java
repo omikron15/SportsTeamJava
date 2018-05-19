@@ -58,5 +58,14 @@ public class Team {
         this.competitions = competitions;
     }
 
+    public void addCompetition(Competition competition){
+        this.competitions.add(competition);
+    }
+
+    public void addPlayer(Player player){
+        this.players.add(player);
+    }
+
+
 
 }
