@@ -54,7 +54,7 @@ public class Team {
         this.players = players;
     }
 
-    @OneToOne(mappedBy = "team", cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     public Manager getManager() {
         return manager;
     }
