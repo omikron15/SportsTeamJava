@@ -14,8 +14,8 @@ public class DBTeam {
 
     private static Session session;
 
-    public List<Team> listAllPlayersOnTeam(Team team){
-        List<Team> results = new ArrayList<Team>();
+    public static List<Player> listAllPlayersOnTeam(Team team){
+        List<Player> results = null;
         session = HibernateUtil.getSessionFactory().openSession();
 
         try {

@@ -1,8 +1,12 @@
 import db.DBHelper;
+import db.DBTeam;
 import models.Competition;
 import models.Manager;
 import models.Player;
 import models.Team;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Runner {
 
@@ -49,6 +53,8 @@ public class Runner {
         DBHelper.addTeamToCompetition(team2, competition2);
 
         DBHelper.delete(manager4);
+
+        List<Player> PlayersOnTeam1 = DBTeam.listAllPlayersOnTeam(team1);
 
     }
 }
