@@ -14,6 +14,8 @@ public class Runner {
         DBHelper.save(manager2);
         Manager manager3 = new Manager("Manager 3", 55);
         DBHelper.save(manager3);
+        Manager manager4 = new Manager("Manager 4", 100);
+        DBHelper.save(manager4);
 
         Team team1 =  new Team("Team 1", manager1);
         DBHelper.save(team1);
@@ -40,7 +42,7 @@ public class Runner {
         Competition competition2 = new Competition("Competition 2");
         DBHelper.save(competition2);
 
-
+        DBHelper.delete(manager4);
 
     }
 }
