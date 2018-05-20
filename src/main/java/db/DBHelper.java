@@ -1,5 +1,7 @@
 package db;
 
+import models.Competition;
+import models.Team;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -71,4 +73,11 @@ public class DBHelper {
             session.close();
         }
     }
+
+    public static void addTeamToCompetition(Team team, Competition competition){
+        team.addCompetition(competition);
+        competition.addTeam(team);
+        save(competition);
+    }
+
 }
