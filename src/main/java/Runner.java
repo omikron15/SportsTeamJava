@@ -42,6 +42,12 @@ public class Runner {
         Competition competition2 = new Competition("Competition 2");
         DBHelper.save(competition2);
 
+        DBHelper.addTeamToCompetition(team1, competition1);
+        DBHelper.addTeamToCompetition(team2, competition1);
+        DBHelper.addTeamToCompetition(team3, competition1);
+        DBHelper.addTeamToCompetition(team1, competition2);
+        DBHelper.addTeamToCompetition(team2, competition2);
+
         DBHelper.delete(manager4);
 
     }
